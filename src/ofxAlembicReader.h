@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Alembic/AbcGeom/All.h>
-#include <Alembic/AbcCoreHDF5/All.h>
 #include <Alembic/AbcCoreOgawa/All.h>
 
 #include "ofMain.h"
@@ -155,7 +154,7 @@ protected:
 	virtual void setupWithObject(Alembic::AbcGeom::IObject);
 	void updateWithTime(double time, Imath::M44f& xform);
 
-	virtual void updateWithTimeInternal(double time, Imath::M44f& xform) { return false; }
+	virtual void updateWithTimeInternal(double time, Imath::M44f& xform) {}
 	virtual void drawInternal() {}
 	virtual void debugDrawInternal() {}
 
@@ -335,7 +334,7 @@ inline bool ofxAlembic::IGeom::get(vector<ofxAlembic::Point> &o)
 }
 
 template <>
-inline bool ofxAlembic::IGeom::get(vector<ofVec3f> &o)
+inline bool ofxAlembic::IGeom::get(std::vector<glm::vec3> &o)
 {
 	if (type != ofxAlembic::POINTS)
 	{

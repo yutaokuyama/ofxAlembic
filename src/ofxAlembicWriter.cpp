@@ -6,11 +6,14 @@ using namespace Alembic::AbcGeom;
 bool Writer::open(const string& path, float fps, Alembic::AbcCoreFactory::IFactory::CoreType type)
 {
 	ofxAlembic::init();
-    if ( type == Alembic::AbcCoreFactory::IFactory::kOgawa) {
-        archive = OArchive(Alembic::AbcCoreOgawa::WriteArchive(), ofToDataPath(path));
-    } else if ( type == Alembic::AbcCoreFactory::IFactory::kHDF5 ) {
-        archive = OArchive(Alembic::AbcCoreHDF5::WriteArchive(), ofToDataPath(path));
-    }
+	if (type == Alembic::AbcCoreFactory::IFactory::kOgawa) {
+		archive = OArchive(Alembic::AbcCoreOgawa::WriteArchive(), ofToDataPath(path));
+	}
+	else if (type == Alembic::AbcCoreFactory::IFactory::kHDF5) {
+		//archive = OArchive(Alembic::AbcCoreHDF5::WriteArchive(), ofToDataPath(path));
+		ofLogError() << "This Alembic build does not support HDF5 format. Use Ogawa format!";
+		return false;
+	}
 	if (!archive.valid()) return false;
 
 	archive.setCompressionHint(1);
@@ -93,8 +96,8 @@ void Writer::addCamera(const string& path, const Camera& camera)
 
 void Writer::addCamera(const string& path, const ofCamera& ofcamera)
 {
-	addXform(path, ofcamera.getGlobalTransformMatrix());
-	
+	//addXform(path, ofcamera.getGlobalTransformMatrix()); comment-out tempolary
+
 	Camera camera(ofcamera);
 	camera.updateSample(ofcamera);
 	addCamera(path + "/cameraShape", camera);

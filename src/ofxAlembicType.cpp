@@ -590,13 +590,12 @@ void Camera::updateParams(ofCamera &camera, ofMatrix4x4 xform)
 		w = width;
 		h = height;
 	}
-	
+
 	float fovH = sample.getFieldOfView();
 	float fovV = ofRadToDeg(2 * atanf(tanf(ofDegToRad(fovH) / 2) * (h / w)));
 	camera.setFov(fovV);
-	//camera.set
 	//camera.setTransformMatrix(xform);
-	
+
 	// TODO: lens offset
 }
 
