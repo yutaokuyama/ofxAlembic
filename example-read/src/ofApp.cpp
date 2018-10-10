@@ -1,35 +1,22 @@
 #include "ofApp.h"
 
-#include "ofxAlembic.h"
-
-ofEasyCam cam;
-
-ofxAlembic::Reader abc;
-
 //--------------------------------------------------------------
-void ofApp::setup()
-{
+void ofApp::setup(){
 	ofSetVerticalSync(true);
-	ofSetFrameRate(60);
+	ofSetFrameRate(30);
 	ofBackground(0);
 
-	string path = "sample.abc";
-
-	// load allembic file
+	string path = "box.abc";
 	abc.open(path);
 
 	// show all drawable names
-	abc.dumpNames();
-}
-
-void ofApp::exit()
-{
-	abc.close();
+	abc.dumpFullnames();
+	ofLog() << abc.getMaxTime();
+	ofLogToConsole();
 }
 
 //--------------------------------------------------------------
-void ofApp::update()
-{
+void ofApp::update(){
 	float t = fmodf(ofGetElapsedTimef(), abc.getMaxTime());
 
 	// update alemblic reader with time in sec
@@ -37,101 +24,33 @@ void ofApp::update()
 }
 
 //--------------------------------------------------------------
-void ofApp::draw()
-{
+void ofApp::draw(){
+	ofBackground(20);
+	ofEnableDepthTest();
+
 	cam.begin();
-
-	glPointSize(4);
-
-	// get meshes and draw
-
 	{
 		ofMesh mesh;
-		abc.get("/Cloner/ClonerShape", mesh);
+		abc.get("/Cube/CubeShape", mesh);
 
+		//ofScale(10, 10, 10);
 		ofSetColor(255, 0, 0);
-		mesh.draw();
+		mesh.drawWireframe();
 	}
 
-	{
-		vector<ofVec3f> points;
-		abc.get("/Emitter/EmitterCloud", points);
+	ofSetColor(255, 0, 255);
 
-		ofSetColor(0, 255, 0);
-		glBegin(GL_POINTS);
-		for (int i = 0; i < points.size(); i++)
-			glVertex3fv(points[i].getPtr());
-		glEnd();
-	}
-
-	{
-		vector<ofPolyline> curves;
-		abc.get("/Tracer/TracerSpline", curves);
-
-		ofSetColor(0, 0, 255);
-		for (int i = 0; i < curves.size(); i++)
-			curves[i].draw();
-	}
-
-	// or simply, abc.draw();
+	abc.draw();
 
 	cam.end();
-
-	ofSetColor(255);
-
-	ofDrawBitmapString(ofToString(abc.getTime()) + "/" + ofToString(abc.getMaxTime()), 10, 20);
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key)
-{
+void ofApp::keyPressed(int key){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key)
-{
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y)
-{
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button)
-{
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button)
-{
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button)
-{
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h)
-{
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg)
-{
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo)
-{
+void ofApp::keyReleased(int key){
 
 }
