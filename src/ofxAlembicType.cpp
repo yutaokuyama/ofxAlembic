@@ -5,7 +5,7 @@ using namespace Alembic::AbcGeom;
 
 #pragma mark - XForm
 
-XForm::XForm(const ofMatrix4x4& matrix)
+XForm::XForm(const glm::mat4& matrix)
 	: mat(toAbc(matrix))
 {
 	
@@ -592,7 +592,8 @@ void Camera::updateParams(ofCamera &camera, ofMatrix4x4 xform)
 	float fovH = sample.getFieldOfView();
 	float fovV = ofRadToDeg(2 * atanf(tanf(ofDegToRad(fovH) / 2) * (h / w)));
 	camera.setFov(fovV);
-	//camera.setTransformMatrix(xform);
+	camera.setGlobalPosition(xform.getTranslation());
+	camera.setGlobalOrientation(xform.getRotate());
 
 	// TODO: lens offset
 }

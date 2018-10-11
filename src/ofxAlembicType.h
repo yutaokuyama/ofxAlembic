@@ -34,7 +34,7 @@ public:
 	Imath::M44f mat;
 	
 	XForm() {}
-	XForm(const ofMatrix4x4& matrix);
+	XForm(const glm::mat4& matrix);
 	
 	void draw();
 	

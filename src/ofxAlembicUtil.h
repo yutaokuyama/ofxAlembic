@@ -53,9 +53,9 @@ inline ofMatrix4x4 toOf(const Imath::M44f& v)
 		v[3][0], v[3][1], v[3][2], v[3][3]);
 }
 
-inline Imath::M44f toAbc(const ofMatrix4x4& v)
+inline Imath::M44f toAbc(const glm::mat4& v)
 {
-	const float *p = v.getPtr();
+	const float *p = glm::value_ptr(v);
 	return Imath::M44f(p[0], p[1], p[2], p[3],
 		p[4], p[5], p[6], p[7],
 		p[8], p[9], p[10], p[11],

@@ -96,7 +96,7 @@ void Writer::addCamera(const string& path, const Camera& camera)
 
 void Writer::addCamera(const string& path, const ofCamera& ofcamera)
 {
-	//addXform(path, ofcamera.getGlobalTransformMatrix()); comment-out tempolary
+	addXform(path, ofcamera.getGlobalTransformMatrix());
 
 	Camera camera(ofcamera);
 	camera.updateSample(ofcamera);
