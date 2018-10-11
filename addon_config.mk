@@ -67,10 +67,19 @@ vs:
 	ADDON_INCLUDES += libs/vs/include/OpenEXR
 
 	ADDON_LIBS =
-	ADDON_LIBS += libs/vs/libs/Alembic/Alembic.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Half.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Iex-2_2.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/IexMath-2_2.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/IlmThread-2_2.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Imath-2_2.lib
+	# Release conf
+	ADDON_LIBS += libs/vs/libs/Alembic/Release/Alembic.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Half.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Iex-2_2.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/IexMath-2_2.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/IlmThread-2_2.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Imath-2_2.lib
+	# Debug conf(W.I.P)
+	# ADDON_LIBS += libs/vs/libs/Alembic/Debug/Alembic.lib
+	# ADDON_LIBS += libs/vs/libs/OpenEXR/Debug/Half.lib
+	# ADDON_LIBS += libs/vs/libs/OpenEXR/Debug/Iex-2_2.lib
+	# ADDON_LIBS += libs/vs/libs/OpenEXR/Debug/IexMath-2_2.lib
+	# ADDON_LIBS += libs/vs/libs/OpenEXR/Debug/IlmThread-2_2.lib
+	# ADDON_LIBS += libs/vs/libs/OpenEXR/Debug/Imath-2_2.lib
+	
 
