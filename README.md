@@ -1,5 +1,5 @@
 # ofxAlembic
-This is for openFrameworks 0.10.0/vs2017.
+This ofxAlembic is for openFrameworks 0.10.0/vs2017.
 
 * Alembic 1.7.9
 * OpenEXR 2.2
