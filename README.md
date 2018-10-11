@@ -6,7 +6,7 @@ This ofxAlembic is for openFrameworks 0.10.0/vs2017.
 
 There are some differences from [original repo](https://github.com/perfume-dev/ofxAlembic)
 * Not support MacOS
-* Only supported Ogawa format
+* Only support Ogawa format
 * binaries are 64bit and release-build only.
 
 ## Know issues
