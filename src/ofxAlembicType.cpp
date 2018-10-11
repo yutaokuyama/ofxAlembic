@@ -107,7 +107,7 @@ void XForm::set(Alembic::AbcGeom::IXformSchema &schema, float time)
 
 #pragma mark - Points
 
-Points::Points(const vector<ofVec3f>& ofpoints)
+Points::Points(const vector<glm::vec3>& ofpoints)
 {
 	for (int i = 0; i < ofpoints.size(); i++)
 	{
@@ -150,18 +150,16 @@ void Points::set(IPointsSchema &schema, float time)
 	for (int i = 0; i < num_points; i++)
 	{
 		const V3f& v = src[i];
-		points[i].pos.set(v.x, v.y, v.z);
+		points[i].pos = glm::vec3(v.x, v.y, v.z);
 	}
 }
 
 void Points::draw()
 {
-	glBegin(GL_POINTS);
-	for (int i = 0; i < points.size(); i++)
-	{
-		glVertex3fv(points[i].pos.getPtr());
-	}
-	glEnd();
+	ofVboMesh vbomesh;
+	for (auto& p : points)
+		vbomesh.addVertex(p.pos);
+	vbomesh.drawVertices();
 }
 
 #pragma mark - PolyMesh
