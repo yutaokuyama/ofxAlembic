@@ -1,8 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxAlembic.h"
 
-class testApp : public ofBaseApp
+class ofApp : public ofBaseApp
 {
 public:
 	
@@ -20,5 +21,8 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+
+	ofEasyCam cam;
+	ofxAlembic::Reader abc;
 	
 };

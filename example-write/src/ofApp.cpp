@@ -1,35 +1,29 @@
-#include "testApp.h"
-
-#include "ofxAlembic.h"
-
-ofEasyCam cam;
-
-ofxAlembic::Reader abc;
-
+#include "ofApp.h"
 //--------------------------------------------------------------
-void testApp::setup()
+void ofApp::setup()
 {
 	ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 	ofBackground(0);
 	
-	string path = "sample.abc";
+	
+	string path = "box.abc";
 	
 	{
 		ofCamera outcam;
 		ofxAlembic::Writer writer;
-		
-		if (writer.open(path, 30)) // export at 30fps
+
+		if (writer.open(path, 30, Alembic::AbcCoreFactory::IFactory::kOgawa)) // export at 30fps
 		{
 			for (int f = 0; f < 60; f++)
 			{
 				// points
 				{
-					vector<ofVec3f> points;
+					std::vector<glm::vec3> points;
 					
 					for (int i = 0; i < 10; i++)
 					{
-						ofVec3f p;
+						glm::vec3 p;
 						p.x = ofRandom(-300, 300);
 						p.y = ofRandom(-300, 300);
 						p.z = ofRandom(-300, 300);
@@ -41,7 +35,7 @@ void testApp::setup()
 				
 				// curves
 				{
-					vector<ofPolyline> curves;
+					std::vector<ofPolyline> curves;
 					
 					for (int i = 0; i < 10; i++)
 					{
@@ -49,7 +43,7 @@ void testApp::setup()
 						
 						for (int n = 0; n < 100; n++)
 						{
-							ofVec3f v;
+							glm::vec3 v;
 							v.x = ofSignedNoise(1, 0, 0, n * 0.01 + f * 10 + i) * 300;
 							v.y = ofSignedNoise(0, 1, 0, n * 0.01 + f * 10 + i) * 300;
 							v.z = ofSignedNoise(0, 0, 1, n * 0.01 + f * 10 + i) * 300;
@@ -70,7 +64,7 @@ void testApp::setup()
 					
 					for (int i = 0; i < num; i++)
 					{
-						ofVec3f p;
+						glm::vec3 p;
 						p.x = ofRandom(-300, 300);
 						p.y = ofRandom(-300, 300);
 						p.z = ofRandom(-300, 300);
@@ -82,8 +76,7 @@ void testApp::setup()
 				
 				// mesh with xform
 				{
-					ofMatrix4x4 mat;
-					mat.glRotate(f * 5, 0, 1, 0);
+					glm::mat4 mat = glm::translate(glm::vec3(0, 0, 0));
 					writer.addXform("/box", mat);
 					
 					if (f == 0)
@@ -111,31 +104,28 @@ void testApp::setup()
 	}
 	
 	abc.open(path);
-	
 	abc.dumpNames();
 }
 
-void testApp::exit()
+void ofApp::exit()
 {
 	abc.close();
 }
 
 //--------------------------------------------------------------
-void testApp::update()
+void ofApp::update()
 {
 	float t = fmodf(ofGetElapsedTimef(), abc.getMaxTime());
 	abc.setTime(t);
 }
 
 //--------------------------------------------------------------
-void testApp::draw()
+void ofApp::draw()
 {
+	
 	abc.get("/of_camera/cameraShape", cam);
 	
 	cam.begin();
-
-	glPointSize(4);
-	
 	{
 		ofMesh mesh;
 		abc.get("/polymesh", mesh);
@@ -145,18 +135,17 @@ void testApp::draw()
 	}
 
 	{
-		vector<ofVec3f> points;
+		std::vector<glm::vec3> points;
 		abc.get("/points", points);
 		
 		ofSetColor(0, 255, 0);
-		glBegin(GL_POINTS);
-		for (int i = 0; i < points.size(); i++)
-			glVertex3fv(points[i].getPtr());
-		glEnd();
+		for (int i = 0; i < points.size(); i++) {
+			ofDrawCircle(points[i].x, points[i].y, points[i].z, 5);
+		}
 	}
 
 	{
-		vector<ofPolyline> curves;
+		std::vector<ofPolyline> curves;
 		abc.get("/curves", curves);
 		
 		ofSetColor(0, 0, 255);
@@ -170,64 +159,65 @@ void testApp::draw()
 	}
 
 	// or simply, abc.draw();
-	
+
 	cam.end();
 	
 	ofSetColor(255);
 	
 	ofDrawBitmapString(ofToString(abc.getTime()) + "/" + ofToString(abc.getMaxTime()), 10, 20);
+
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key)
+void ofApp::keyPressed(int key)
 {
 	
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key)
+void ofApp::keyReleased(int key)
 {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y)
+void ofApp::mouseMoved(int x, int y)
 {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button)
+void ofApp::mouseDragged(int x, int y, int button)
 {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button)
+void ofApp::mousePressed(int x, int y, int button)
 {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button)
+void ofApp::mouseReleased(int x, int y, int button)
 {
 
 }
 
 //--------------------------------------------------------------
-void testApp::windowResized(int w, int h)
+void ofApp::windowResized(int w, int h)
 {
 
 }
 
 //--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg)
+void ofApp::gotMessage(ofMessage msg)
 {
 
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo)
+void ofApp::dragEvent(ofDragInfo dragInfo)
 {
 
 }

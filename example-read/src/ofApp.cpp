@@ -6,13 +6,15 @@ void ofApp::setup(){
 	ofSetFrameRate(30);
 	ofBackground(0);
 
-	string path = "box.abc";
+	string path = "metaball1.abc";
 	abc.open(path);
 
 	// show all drawable names
 	abc.dumpFullnames();
 	ofLog() << abc.getMaxTime();
 	ofLogToConsole();
+
+	cout << "Alembic::Abc::GetLibraryVersionShort() : " << Alembic::Abc::GetLibraryVersionShort() << endl;
 }
 
 //--------------------------------------------------------------
@@ -31,16 +33,24 @@ void ofApp::draw(){
 	cam.begin();
 	{
 		ofMesh mesh;
-		abc.get("/Cube/CubeShape", mesh);
+		abc.get("/Metaball/MetaballShape", mesh);
 
 		//ofScale(10, 10, 10);
-		ofSetColor(255, 0, 0);
+
+		ofPushMatrix();
+		ofScale(0.1, 0.1, 0.1);
+		//abc.draw();
 		mesh.drawWireframe();
+		ofPopMatrix();
+		//ofSetColor(255, 0, 0);
 	}
 
 	ofSetColor(255, 0, 255);
 
-	abc.draw();
+	ofPushMatrix();
+	ofScale(0.1, 0.1, 0.1);
+	//abc.draw();
+	ofPopMatrix();
 
 	cam.end();
 }
