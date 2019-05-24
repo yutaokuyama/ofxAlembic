@@ -69,12 +69,16 @@ vs:
 	ADDON_LIBS =
 	# Release conf
 	ADDON_LIBS += libs/vs/libs/Alembic/Release/Alembic.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Half.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Iex-2_2.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/IexMath-2_2.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/IlmThread-2_2.lib
-	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Imath-2_2.lib
-	# Debug conf(W.I.P)
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Half-2_3.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Iex-2_3.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/IexMath-2_3.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/IlmThread-2_3.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/Imath-2_3.lib
+	ADDON_LIBS += libs/vs/libs/OpenEXR/Release/hdf5.lib
+
+	ADDON_DLLS_TO_COPY += "libs/vs/libs/Alembic/Release/Alembic.dll"
+
+	# Debug conf
 	# ADDON_LIBS += libs/vs/libs/Alembic/Debug/Alembic.lib
 	# ADDON_LIBS += libs/vs/libs/OpenEXR/Debug/Half.lib
 	# ADDON_LIBS += libs/vs/libs/OpenEXR/Debug/Iex-2_2.lib
