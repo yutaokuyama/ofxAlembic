@@ -1,8 +1,8 @@
 # ofxAlembic
 This ofxAlembic is for openFrameworks 0.10.0/vs2017.
 
-* Alembic 1.7.9
-* OpenEXR 2.2
+* Alembic 1.7.11
+* OpenEXR 2.3
 
 There are some differences from [original repo](https://github.com/perfume-dev/ofxAlembic)
 * Not support MacOS
