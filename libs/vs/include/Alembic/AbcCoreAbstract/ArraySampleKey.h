@@ -83,15 +83,15 @@ struct ArraySampleKey : public Alembic::Util::totally_ordered<ArraySampleKey>
 
 //-*****************************************************************************
 // Equality operator.
-struct ArraySampleKeyEqualTo :
-        public std::binary_function<ArraySampleKey,ArraySampleKey,bool>
+struct ArraySampleKeyEqualTo
 {
-    bool operator()( ArraySampleKey const &a,
-                     ArraySampleKey const &b ) const
+    bool operator()(ArraySampleKey const& a,
+        ArraySampleKey const& b) const
     {
         return a == b;
     }
 };
+
 
 //-*****************************************************************************
 // Hash function
@@ -105,14 +105,14 @@ inline size_t StdHash( ArraySampleKey const &a )
 }
 
 //-*****************************************************************************
-struct ArraySampleKeyStdHash :
-        public std::unary_function<ArraySampleKey,size_t>
+struct ArraySampleKeyStdHash
 {
-    size_t operator()( ArraySampleKey const &a ) const
+    size_t operator()(ArraySampleKey const& a) const
     {
-        return StdHash( a );
+        return StdHash(a);
     }
 };
+
 
 //-*****************************************************************************
 template <class MAPPED>
